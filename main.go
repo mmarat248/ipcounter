@@ -57,7 +57,6 @@ func main() {
 	}
 
 	elapsed := time.Since(start)
-
 	fmt.Printf("%s count: %d\n", *counterType, count)
 	fmt.Printf("Time elapsed: %v\n", elapsed)
 }

@@ -48,7 +48,7 @@ func (b *BitMap) SetBit(position uint32, value bool) bool {
 	if value {
 		b.data[index] |= 1 << bit
 	} else {
-		b.data[index] &^= 1 << bit
+		b.data[index] ^= 1 << bit
 	}
 
 	if oldValue != b.data[index] {

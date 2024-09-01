@@ -48,18 +48,10 @@ func (counter *IPCounter) CountIPFromFile(fileName string) (uint64, error) {
 		return 0, fmt.Errorf("wrong file size: %d", fileStat.Size())
 	}
 
-	fileChunkSize := 1073741824 // should % 4096
-	offset := int64(0)
-	for offset < fileStat.Size() {
-		length := fileChunkSize
-		if length > int(fileStat.Size()-offset) {
-			length = int(fileStat.Size() - offset)
-		}
-		err = counter.ProcessFileChunk(file, offset, length)
-		if err != nil {
-			return 0, err
-		}
-		offset += int64(fileChunkSize)
+	// TODO: split
+	err = counter.ProcessFileChunk(file, 0, int(fileStat.Size()))
+	if err != nil {
+		return 0, err
 	}
 	return counter.ipMap.Count(), nil
 }
